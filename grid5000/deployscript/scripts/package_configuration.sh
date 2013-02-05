@@ -176,7 +176,8 @@ create_kapower3_configuration () {
 
 # Creates a client configuration file
 create_client_configuration () {
-    local bootstrap_addresses=$(get_hosts_from_file "bootstrap_nodes.txt")
+    #local bootstrap_addresses=$(get_hosts_from_file "bootstrap_nodes.txt")
+    bootstrap_addresses=`cat $tmp_directory/bootstrap_nodes.txt | head -n 1`
     sed 's/^general.bootstrapNodes.*/general.bootstrapNodes = '$bootstrap_addresses:$start_control_data_port'/g' "$config_templates_directory/$client_config_name" > "$tmp_directory/$client_config_name" 
 }
 

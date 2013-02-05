@@ -35,6 +35,7 @@ print_usage () {
     echo "-a                        Autoconfig"
     echo "-d                        Deploy image (vlan)"
     echo "-h                        Prepare the service node"
+    echo "-l                        Prepare and launch snooze system"
 }
 
 # Starts autoconfiguration
@@ -54,12 +55,18 @@ autoconfig () {
         return $error_code
     fi
 
+    prepare_snooze_system_and_launch
+    if [[ $? -ne $success_code ]]
+    then
+        return $error_code
+    fi
+
     return $success_code
 }
 
 # Process the user input
 option_found=0
-while getopts ":adh" opt; do
+while getopts ":adhl" opt; do
     option_found=1
     print_settings
 
@@ -78,6 +85,11 @@ while getopts ":adh" opt; do
             prepare_service_node
             return_value=$?
             ;;
+        l) 
+           echo "Preparing and launching the snooze system"
+           prepare_snooze_system_and_launch
+           return_value=$?
+           ;;
         \?)
             echo "$log_tag Invalid option: -$OPTARG" >&2
             print_usage

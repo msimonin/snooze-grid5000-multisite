@@ -37,6 +37,18 @@ prepare_service_node()
   echo "$log_tag +------------------------------------------------"
 }
 
+prepare_snooze_system_and_launch()
+{
+
+  echo "$log_tag Launching the snooze system from : `cat $tmp_directory/service_node.txt `"
+  # modify path to sthe script settings
+  perl -p -e "s#^base_directory.*#base_directory=\"$exported_directory_service_node\"#" "$deploy_script_directory/scripts/settings.sh" > $tmp_directory/settings.sh
+  put_taktuk "$tmp_directory/service_node.txt" "$tmp_directory/settings.sh" "$exported_directory_service_node/$relative_script_directory/scripts/settings.sh" 
+  # Launch the deployment from the service
+  echo "$log_tag $exported_directory_service_node/$relative_script_directory/service_node.sh -a"
+  service_node=`cat $tmp_directory/service_node.txt`  
+  run_taktuk_single_machine "$service_node" exec "[ $exported_directory_service_node/$relative_script_directory/service_node.sh -a ]"    
+}
 generate_keys()
 {
    echo "$log_tag generating keys"
@@ -87,7 +99,7 @@ copy_files(){
   service_node=`cat $tmp_directory/service_node.txt`
   echo "$log_tag Copying files ..."
   run_taktuk "$tmp_directory/service_node.txt" exec "[ mkdir -p $exported_directory_service_node ]"
-  rsync --progress -avz ~/snoozedeploy root@$service_node:$exported_directory_service_node/.
+  rsync -avz $base_directory/$root_script_directory root@$service_node:$exported_directory_service_node/.
   rsync --progress -avz $source_images_directory root@$service_node:$exported_directory_service_node/.
 }
 

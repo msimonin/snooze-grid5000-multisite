@@ -32,7 +32,9 @@ snooze_group="snooze"
 
 # Deploy script root directory
 base_directory=$HOME
-deploy_script_directory="$base_directory/snoozedeploy/grid5000/deployscript"
+root_script_directory="snooze-grid5000-multisite"
+relative_script_directory="$root_script_directory/grid5000/deployscript"
+deploy_script_directory="$base_directory/$relative_script_directory"
 
 # Katapult
 katapult_commad="$deploy_script_directory/katapult/katapult3"
@@ -70,7 +72,7 @@ destination_snooze_directory="/tmp/snooze"
 source_images_directory="$base_directory/vmimages"
 destination_images_directory="$destination_snooze_directory/images"
 
-source_experiments_script_directory="$base_directory/snoozedeploy/grid5000/experiments"
+source_experiments_script_directory="$base_directory/$root_script_directory/grid5000/experiments"
 destination_experiments_script_directory="$destination_snooze_directory/experiments"
 
 ### Cluster settings
@@ -84,8 +86,8 @@ environment_name="sid-x64-mpi-snooze-$cluster_location.env"
 ## Cluster settings 
 centralized_deployment=false
 number_of_bootstrap_nodes=1
-number_of_group_managers=3
-number_of_local_controllers=6
+number_of_group_managers=2
+number_of_local_controllers=4
 number_of_subnets=1
 
 # Deployment specific settings
@@ -98,9 +100,6 @@ print_settings()
 {   
     echo "<------------------------------------------->"
     echo "$log_tag Deployment user: $USER"
-    echo "$log_tag Deployment environment: $environment_name"
-    echo "$log_tag Cluster location: $cluster_location"
-    echo "$log_tag Maximum number of deployment rounds: $max_deploy_runs"
     echo "<------------------------------------------->"
     echo "$log_tag Centralized deployment: $centralized_deployment"
     echo "$log_tag Number of bootstrap nodes: $number_of_bootstrap_nodes"

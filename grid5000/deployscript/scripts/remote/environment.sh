@@ -41,9 +41,11 @@ zookeeper_init_script="/etc/init.d/zookeeper"
 # G5K settings
 grid5000_user="root"
 working_directory="/$grid5000_user/"
-#tmp_directory="/$grid5000_user/snoozedeploy/grid5000/deployscript/tmp"
-tmp_directory="/tmp/service/snoozedeploy/grid5000/deployscript/tmp"
+
 #must be the same than $remote_tmp_directory
+base_directory="/tmp/service"
+root_script_directory="snooze-grid5000-multisite"
+tmp_directory="$base_directory/$root_script_directory/grid5000/deployscript/tmp"
 tmp_directory_service_node="/tmp/service/nfs"
 
 # Configs settings
