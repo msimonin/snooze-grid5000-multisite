@@ -4,6 +4,30 @@ The Snooze Grid`5000 multi site deployement script
 
 ## Installation and Usage
 
+Make a reservation : 
+
+    (frontend)$ oargridsub -t deploy -w 1:00:00 rennes:rdef="{\\\\\\\"type='kavlan-global'\\\\\\\"}/vlan=1+/slash_22=1+/nodes=3",lyon:rdef=/nodes=3,sophia:rdef=/nodes=3 > ~/oargrid.out
+
+NB : the file oargrid.out is used by the script so it must be placed in your home directory.
+
+
+If everything is fine this file looks like : 
+
+rennes:rdef={\\\"type='kavlan-global'\\\"}/vlan=1+/slash_22=1,lyon:rdef=/nodes=3,sophia:rdef=/nodes=3
+    [OAR_GRIDSUB] [rennes] Date/TZ adjustment: 0 seconds
+    [OAR_GRIDSUB] [rennes] Reservation success on rennes : batchId = 471354
+    [OAR_GRIDSUB] [lyon] Date/TZ adjustment: 0 seconds
+    [OAR_GRIDSUB] [lyon] Reservation success on lyon : batchId = 599979
+    [OAR_GRIDSUB] [sophia] Date/TZ adjustment: 0 seconds
+    [OAR_GRIDSUB] [sophia] Reservation success on sophia : batchId = 530702
+    [OAR_GRIDSUB] Grid reservation id = 42581
+    [OAR_GRIDSUB] SSH KEY : /tmp/oargrid//oargrid_ssh_key_msimonin_42581
+      You can use this key to connect directly to your OAR nodes with the oar user.
+   
+Connect to your job (with the subnet reservation): 
+
+    (frontend)$ oarsub -C 471354
+
 Configure the proxy : 
 
     (frontend)$ export https_proxy="http://proxy:3128"
@@ -14,19 +38,11 @@ On a grid5000 frontend in your home directory :
 
 Download latest version of debian package (snoozenode is require, snoozeclient is optional) : 
 
-    (frontend)$ cd snooze-grid5000-multisite.git
+    (frontend)$ cd ~/snooze-grid5000-multisite/grid5000/deployscript/deb_packages/
     (frontend)$ wget https://ci.inria.fr/snooze-software/job/master-snoozenode/ws/distributions/deb-package/snoozenode_1.1.0-0_all.deb  
     (frontend)$ wget https://ci.inria.fr/snooze-software/job/master-snoozeclient/ws/distributions/deb-package/snoozeclient_1.1.0-0_all.deb  
 
 Other packages could be found in https://ci.inria.fr/snooze-software/.
-
-Place them in ~/snooze-grid5000-multisite/grid5000/deployscript/deb_packages/.
-
-Make a reservation : 
-
-    (frontend)$ oargridsub -t deploy -w 1:00:00 rennes:rdef="{\\\\\\\"type='kavlan-global'\\\\\\\"}/vlan=1+/slash_22=1+/nodes=3",lyon:rdef=/nodes=3,sophia:rdef=/nodes=3 > ~/oargrid.out
-
-NB : the file oargrid.out is used by the script so it must be placed in your home directory.
 
 Configure the number of nodes in the **settings.sh**.
 
