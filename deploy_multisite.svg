@@ -38,9 +38,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="283.95326"
-     inkscape:cy="572.04247"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-89.593158"
+     inkscape:cy="405.52798"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,33 +70,33 @@
        id="rect2991"
        width="143.57153"
        height="73.871017"
-       x="288.83868"
-       y="65.378204" />
+       x="287.82852"
+       y="229.02292" />
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="324.25897"
-       y="108.87971"
+       x="323.24881"
+       y="272.52441"
        id="text2993"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan2995"
-         x="324.25897"
-         y="108.87971">Frontend</tspan><tspan
+         x="323.24881"
+         y="272.52441">Frontend</tspan><tspan
          sodipodi:role="line"
-         x="324.25897"
-         y="128.8797"
+         x="323.24881"
+         y="292.52441"
          id="tspan2997" /></text>
     <rect
        style="fill:#ff4e00;fill-opacity:1;stroke:#000000;stroke-width:0.83347082;stroke-opacity:1"
        id="rect4115"
        width="92.090408"
        height="88.049797"
-       x="42.848225"
-       y="283.04776" />
+       x="41.83807"
+       y="446.69247" />
     <g
        id="g3815"
-       transform="translate(1.5152289,85.35789)">
+       transform="translate(0.50507632,249.0026)">
       <a
          id="a3812"
          style="fill:#ffe400;fill-opacity:1">
@@ -125,7 +125,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(95.964493,84.852813)"
+       transform="translate(94.954341,248.49753)"
        id="g3815-7">
       <a
          id="a3812-8"
@@ -155,7 +155,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(193.19167,84.0952)"
+       transform="translate(192.18151,247.73991)"
        id="g3815-1">
       <a
          id="a3812-6"
@@ -185,7 +185,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(287.64094,83.59012)"
+       transform="translate(286.63078,247.23483)"
        id="g3815-7-7">
       <a
          id="a3812-8-7"
@@ -215,7 +215,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(378.04959,83.085053)"
+       transform="translate(377.03943,246.72977)"
        id="g3815-1-7">
       <a
          id="a3812-6-4"
@@ -245,7 +245,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(543.20954,83.590125)"
+       transform="translate(542.19938,247.23484)"
        id="g3815-7-7-8">
       <a
          id="a3812-8-7-2"
@@ -277,60 +277,64 @@
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="530.83521"
-       y="328.58789"
+       x="529.82507"
+       y="492.2326"
        id="text4111"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4113"
-         x="530.83521"
-         y="328.58789">...</tspan></text>
+         x="529.82507"
+         y="492.2326">...</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="41.921333"
-       y="384.65134"
+       x="40.911179"
+       y="548.29602"
        id="text4136"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="41.921333"
-         y="384.65134"
+         x="40.911179"
+         y="548.29602"
          id="tspan4140">Service Node</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:7.21215963;stroke-opacity:1"
        id="rect4156"
        width="686.68097"
        height="152.36713"
-       x="29.629915"
-       y="253.66699" />
+       x="28.619762"
+       y="417.31171" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.97309995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
-       d="m 360.13685,139.24922 -1.5327,109.94028"
+       d="m 359.12669,302.89393 -1.5327,109.94028"
        id="path4158"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="374.7666"
-       y="176.55992"
+       x="373.75644"
+       y="340.20465"
        id="text4784"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="374.7666"
-         y="176.55992"
+         x="373.75644"
+         y="340.20465"
          id="tspan4792">- deploy the environment</tspan><tspan
          sodipodi:role="line"
-         x="374.7666"
-         y="194.05992"
+         x="373.75644"
+         y="357.70465"
          id="tspan4788">- deploy the ssh keys</tspan><tspan
          sodipodi:role="line"
-         x="374.7666"
-         y="211.55992"
-         id="tspan4790">- prepare the service node </tspan></text>
+         x="373.75644"
+         y="375.20465"
+         id="tspan4790">- prepare the service node</tspan><tspan
+         sodipodi:role="line"
+         x="373.75644"
+         y="392.70465"
+         id="tspan3114">- enable routing to the subnet </tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:10,5;stroke-dashoffset:0"
-       d="m 15.714286,456.6479 708.571434,1.42857"
+       style="fill:none;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:10, 5;stroke-dashoffset:0"
+       d="m 20.765049,614.2317 708.571431,1.42857"
        id="path4804"
        inkscape:connector-curvature="0" />
     <rect
@@ -338,11 +342,11 @@
        id="rect4115-2"
        width="92.090408"
        height="88.049797"
-       x="313.56909"
-       y="506.69492" />
+       x="312.55893"
+       y="633.97412" />
     <g
        id="g3815-2"
-       transform="translate(272.23611,309.00504)">
+       transform="translate(271.22595,436.28426)">
       <a
          id="a3812-7"
          style="fill:#ffe400;fill-opacity:1">
@@ -371,7 +375,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(29.799502,500.53058)"
+       transform="translate(28.78935,627.8098)"
        id="g3815-7-4">
       <a
          id="a3812-8-0"
@@ -401,7 +405,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(128.54191,500.0255)"
+       transform="translate(127.53175,627.30472)"
        id="g3815-1-3">
       <a
          id="a3812-6-5"
@@ -431,7 +435,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(222.99118,499.52042)"
+       transform="translate(221.98102,626.79964)"
        id="g3815-7-7-0">
       <a
          id="a3812-8-7-0"
@@ -461,7 +465,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(313.39983,499.01535)"
+       transform="translate(312.38967,626.29457)"
        id="g3815-1-7-7">
       <a
          id="a3812-6-4-1"
@@ -491,7 +495,7 @@
            sodipodi:role="line" /></text>
     </g>
     <g
-       transform="translate(478.55978,499.52042)"
+       transform="translate(477.54962,626.79964)"
        id="g3815-7-7-8-0">
       <a
          id="a3812-8-7-2-4"
@@ -522,107 +526,183 @@
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       d="m 13.40981,656.67825 708.57143,1.42857"
+       d="m 12.399657,783.95747 708.571423,1.42857"
        id="path4804-0"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 361.42857,594.50504 0,62.5"
+       d="m 360.41841,721.78426 0,62.5"
        id="path5004"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.01811492px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 401.25,658.13693 0,47.73622"
+       d="m 400.23984,785.41615 0,47.73622"
        id="path5004-4"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.01811492px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 568.92857,658.13693 0,47.73621"
+       d="m 567.91841,785.41615 0,47.73621"
        id="path5004-4-5"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.01811492px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 312.14286,658.13693 0,47.73622"
+       d="m 311.1327,785.41615 0,47.73622"
        id="path5004-4-0"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.01811492px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 216.42858,658.49408 0,47.73621"
+       d="m 215.41842,785.7733 0,47.73621"
        id="path5004-4-4"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.04048204px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 115,656.73073 0,49.8567"
+       d="m 113.98984,784.00995 0,49.8567"
        id="path5004-4-1"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="416.42856"
-       y="545.93359"
+       x="146.71783"
+       y="670.18237"
        id="text5070"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5072"
-         x="416.42856"
-         y="545.93359">Configure the snooze system</tspan></text>
+         x="146.71783"
+         y="670.18237">Configure and deploy</tspan><tspan
+         sodipodi:role="line"
+         x="146.71783"
+         y="687.68237"
+         id="tspan3112">the snooze system</tspan><tspan
+         sodipodi:role="line"
+         x="146.71783"
+         y="705.18237"
+         id="tspan3110" /></text>
     <rect
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2,2;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
        id="rect5074"
        width="195"
        height="95"
-       x="66.428574"
-       y="693.07648" />
+       x="65.418419"
+       y="820.35565" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
        id="rect5074-3"
        width="195"
        height="95"
-       x="267.5"
-       y="692.71936" />
+       x="266.48984"
+       y="819.99854" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
        id="rect5074-5"
        width="195"
        height="95"
-       x="467.50003"
-       y="692.71936" />
+       x="466.48987"
+       y="819.99854" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="105.71429"
-       y="805.21936"
+       x="104.70414"
+       y="932.49854"
        id="text5103"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5105"
-         x="105.71429"
-         y="805.21936">Bootstraps</tspan></text>
+         x="104.70414"
+         y="932.49854">Bootstraps</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="319.85651"
-       y="804.58063"
+       x="303.84634"
+       y="931.8598"
        id="text5103-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5105-7"
-         x="319.85651"
-         y="804.58063">Group managers</tspan><tspan
+         x="303.84634"
+         y="931.8598">Group managers</tspan><tspan
          sodipodi:role="line"
-         x="319.85651"
-         y="822.08063"
+         x="303.84634"
+         y="949.3598"
          id="tspan5128" /></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="511.2851"
-       y="803.86627"
+       x="510.27493"
+       y="931.14545"
        id="text5103-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5105-2"
-         x="511.2851"
-         y="803.86627">Local controllers</tspan></text>
+         x="510.27493"
+         y="931.14545">Local controllers</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:10, 5;stroke-dashoffset:0"
+       d="m 24.521491,958.71386 708.571429,1.42857"
+       id="path4804-1"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3116"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:14px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3118"><rect
+           id="rect3120"
+           width="180.81731"
+           height="87.88327"
+           x="403.05087"
+           y="430.10822" /></flowRegion><flowPara
+         id="flowPara3122"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3124"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:14px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3126"><rect
+           id="rect3128"
+           width="334.3605"
+           height="27.274118"
+           x="208.09143"
+           y="461.42294" /></flowRegion><flowPara
+         id="flowPara3130"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="413.15237"
+       y="660.42297"
+       id="text3132"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="413.15237"
+         y="660.42297"
+         id="tspan3136">- configure /install snooze package</tspan><tspan
+         sodipodi:role="line"
+         x="413.15237"
+         y="677.92297"
+         id="tspan3140">- configure nfs share storage</tspan><tspan
+         sodipodi:role="line"
+         x="413.15237"
+         y="695.42297"
+         id="tspan3142">- generate the iso context file given </tspan><tspan
+         sodipodi:role="line"
+         x="413.15237"
+         y="712.92297"
+         id="tspan3168">the kavlan and subnet properties</tspan><tspan
+         sodipodi:role="line"
+         x="413.15237"
+         y="730.42297"
+         id="tspan3144" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:10, 5;stroke-dashoffset:0"
+       d="m 16.440264,206.15022 708.571426,1.42857"
+       id="path4804-02"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="86.873116"
+       y="108.8797"
+       id="text3164"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3166"
+         x="86.873116"
+         y="108.8797">Snooze deployment over grid'5000</tspan></text>
   </g>
 </svg>
