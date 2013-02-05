@@ -4,7 +4,7 @@ The Snooze Grid`5000 multi site deployement script
 
 ## Installation and Usage
 
-Make a reservation : 
+* Make a reservation : 
 
     (frontend)$ oargridsub -t deploy -w 1:00:00 rennes:rdef="{\\\\\\\"type='kavlan-global'\\\\\\\"}/vlan=1+/slash_22=1+/nodes=3",lyon:rdef=/nodes=3,sophia:rdef=/nodes=3 > ~/oargrid.out
 
@@ -24,19 +24,19 @@ If everything is fine this file looks like :
     [OAR_GRIDSUB] SSH KEY : /tmp/oargrid//oargrid_ssh_key_msimonin_42581
       You can use this key to connect directly to your OAR nodes with the oar user.
    
-Connect to your job (with the subnet reservation): 
+* Connect to your job (with the subnet reservation): 
 
     (frontend)$ oarsub -C 471354
 
-Configure the proxy : 
+* Configure the proxy : 
 
     (frontend)$ export https_proxy="http://proxy:3128"
 
-On a grid5000 frontend in your home directory :
+* Clone the git repository :
 
     (frontend)$ git clone https://github.com/msimonin/snooze-grid5000-multisite.git 
 
-Download latest version of debian package (snoozenode is require, snoozeclient is optional) : 
+* Download latest version of debian package (snoozenode is require, snoozeclient is optional) : 
 
     (frontend)$ cd ~/snooze-grid5000-multisite/grid5000/deployscript/deb_packages/
     (frontend)$ wget https://ci.inria.fr/snooze-software/job/master-snoozenode/ws/distributions/deb-package/snoozenode_1.1.0-0_all.deb  
@@ -44,7 +44,7 @@ Download latest version of debian package (snoozenode is require, snoozeclient i
 
 Other packages could be found in https://ci.inria.fr/snooze-software/.
 
-Configure the number of nodes in the **settings.sh**.
+* Configure the number of nodes in the **settings.sh**.
 
     (frontend)$ cd ~/snooze-grid5000-multisite/grid5000/deployscript/
     (frontend)$ vi scripts/settings.sh
@@ -55,25 +55,25 @@ Configure the number of nodes in the **settings.sh**.
 
 NB : Since we use a "service node" for the deployment you will get a Snooze cluster running with n-1 nodes.
 
-Retrieve VMs base images in **~/vmimages/**
+* Retrieve VMs base images in **~/vmimages/**
 You can get my debian base image in /home/msimonin/vmimages 
 
-Launch the automatic script :
+* Launch the automatic script :
 
     (frontend)$ ./snooze_deploy.sh -a
 
-Connection to the service node : 
+* Connection to the service node : 
 
     (frontend)$ cat tmp/service_node.txt
     (frontend)$ ssh -l root <service node>
 
-Connection to the first bootstrap : 
+* Connection to the first bootstrap : 
  
     (service)$ cd /tmp/service/snooze-grid5000-multisite/grid5000/deployscript/
     (service)$ cat tmp/bootstrap_nodes.txt
     (service)$ ssh -l root <first bootstrap>
 
-Launching VMs : 
+* Launching VMs : 
 
 The first bootstrap node host some helper to launch VMs.
 
@@ -83,7 +83,7 @@ The first bootstrap node host some helper to launch VMs.
 
 These commands will create and start 10 VMs.
 
-Visualizing the system : 
+* Visualizing the system : 
 Make a tunnel from your laptop to the bootstrap through the grid'5000 frontend on port 5000. If snoozeclient is installed on your PC, you can launch :
     (PC) snoozeclient visualize.
 
