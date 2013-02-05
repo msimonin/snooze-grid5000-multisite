@@ -55,6 +55,9 @@ Configure the number of nodes in the **settings.sh**.
 
 NB : Since we use a "service node" for the deployment you will get a Snooze cluster running with n-1 nodes.
 
+Retrieve VMs base images in **~/vmimages/**
+You can get my debian base image in /home/msimonin/vmimages 
+
 Launch the automatic script :
 
     (frontend)$ ./snooze_deploy.sh -a
