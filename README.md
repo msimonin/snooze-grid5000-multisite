@@ -13,7 +13,7 @@ NB : the file oargrid.out is used by the script so it must be placed in your hom
 
 If everything is fine this file looks like : 
 
-rennes:rdef={\\\"type='kavlan-global'\\\"}/vlan=1+/slash_22=1,lyon:rdef=/nodes=3,sophia:rdef=/nodes=3
+    rennes:rdef={\\\"type='kavlan-global'\\\"}/vlan=1+/slash_22=1,lyon:rdef=/nodes=3,sophia:rdef=/nodes=3
     [OAR_GRIDSUB] [rennes] Date/TZ adjustment: 0 seconds
     [OAR_GRIDSUB] [rennes] Reservation success on rennes : batchId = 471354
     [OAR_GRIDSUB] [lyon] Date/TZ adjustment: 0 seconds
