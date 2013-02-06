@@ -34,7 +34,7 @@ If everything is fine this file looks like :
 
 * Clone the git repository :
 
-      (frontend)$ git clone https://github.com/msimonin/snooze-grid5000-multisite.git 
+        (frontend)$ git clone https://github.com/msimonin/snooze-grid5000-multisite.git 
 
 * Download latest version of debian package (snoozenode is require, snoozeclient is optional) : 
 
@@ -56,7 +56,9 @@ Other packages could be found in https://ci.inria.fr/snooze-software/.
 NB : Since we use a "service node" for the deployment you will get a Snooze cluster running with n-1 nodes.
 
 * Retrieve VMs base images in **~/vmimages/**
-You can get my debian base image in /home/msimonin/vmimages 
+You can get my debian base image in /home/msimonin/vmimages in Rennes
+
+        (frontend)$ scp -r <yourlogin>@rennes:/home/msimonin/vmimages ~/.
 
 * Launch the automatic script :
 
@@ -75,7 +77,7 @@ You can get my debian base image in /home/msimonin/vmimages
 
 * Launching VMs : 
 
-The first bootstrap node host some helper to launch VMs.
+The first bootstrap node hosts some helper to launch VMs.
 
         (bootstrap)$ cd /tmp/snooze/experiments
         (bootstrap)$ ./experiments -c test 5
