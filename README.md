@@ -87,6 +87,7 @@ These commands will create and start 10 VMs.
 
 * Visualizing the system : 
 Make a tunnel from your laptop to the bootstrap through the grid'5000 frontend on port 5000. If snoozeclient is installed on your PC, you can launch :
+
         (PC) snoozeclient visualize.
 
 ## Copyright
