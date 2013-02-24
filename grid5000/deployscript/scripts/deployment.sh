@@ -38,7 +38,7 @@ deploy_image_vlan () {
     create_hosts_list_vlan $job_id
 
     ## Matt : ajout du deploiement multi site
-    kadeploy3 -a  http://public.sophia.grid5000.fr/~msimonin/snooze-ubuntu.env  -f $tmp_directory/full_hosts_list.txt  -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k http://public.sophia.grid5000.fr/~msimonin/authorized_keys
+    kadeploy3 -a  http://public.sophia.grid5000.fr/~msimonin/snooze-ubuntu.env  -f $tmp_directory/full_hosts_list.txt  -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k 
 
     if [[ $? -ne $success_code ]]
     then
