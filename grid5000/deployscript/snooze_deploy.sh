@@ -33,7 +33,7 @@ print_usage () {
     echo "Contact: $author"
     echo "Options:"
     echo "-a                        Autoconfig"
-    echo "-d                        Deploy image (vlan)"
+    echo "-d                        Deploy image"
     echo "-h                        Prepare the service node"
     echo "-l                        Prepare and launch snooze system"
 }
@@ -43,7 +43,12 @@ autoconfig () {
     echo "$log_tag Starting in autoconfiguration mode! This can take some time, you might consider taking a coffee break :-)"
     
     # Deployment
-    deploy_image_vlan 
+    if $multisite 
+    then
+      deploy_image_vlan 
+    else
+      deploy_image_no_vlan
+    fi
     if [[ $? -ne $success_code ]]
     then
         return $error_code
@@ -54,14 +59,15 @@ autoconfig () {
     then
         return $error_code
     fi
-
+    
     prepare_snooze_system_and_launch
     if [[ $? -ne $success_code ]]
     then
         return $error_code
     fi
 
-    return $success_code
+      
+
 }
 
 # Process the user input
@@ -76,8 +82,14 @@ while getopts ":adhl" opt; do
             return_value=$?
             ;;
         d)  
-            echo "deploying image using vlan"
-            deploy_image_vlan
+            if $multisite 
+              then
+              echo "deploying image using vlan"
+              deploy_image_vlan 
+            else
+              echo "deploying image single site"
+              deploy_image_no_vlan
+            fi
             return_value=$?
             ;;
         h)

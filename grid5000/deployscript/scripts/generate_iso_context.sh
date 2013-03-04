@@ -19,7 +19,6 @@
 
 #save the vlan settings
 save_kavlan_settings() {
-  #vlan_net=`route | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' | head -n 1 `
   vlan_net=`route | awk 'NR>3 {print $1}' | head -n 1`
   vlan_netmask=`route | awk 'NR>3 {print $3}' | head -n 1`
    
@@ -29,8 +28,9 @@ save_kavlan_settings() {
 }
 
 generate_iso_context() {
-   save_kavlan_settings
-   
+   if $multisite; then
+     save_kavlan_settings
+   fi 
    cp -r $deploy_script_directory/context $tmp_directory/context
    cp $tmp_directory/common_routes.txt $tmp_directory/context/common/routes
    cp $tmp_directory/common_network.txt $tmp_directory/context/common/network

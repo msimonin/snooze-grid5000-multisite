@@ -30,7 +30,9 @@ prepare_service_node()
  
   copy_files
 
-  add_route_rules_on_nodes
+  if $multisite; then
+    add_route_rules_on_nodes
+  fi
 
   echo "$log_tag +------------------------------------------------"
   echo "$log_tag | Service node is : `cat $tmp_directory/service_node.txt `"

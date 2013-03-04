@@ -38,7 +38,8 @@ deploy_image_vlan () {
     create_hosts_list_vlan $job_id
 
     ## Matt : ajout du deploiement multi site
-    kadeploy3 -a  http://public.sophia.grid5000.fr/~msimonin/snooze-ubuntu.env  -f $tmp_directory/full_hosts_list.txt  -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k http://public.sophia.grid5000.fr/~msimonin/authorized_keys
+    echo "kadeploy3 -a  http://public.rennes.grid5000.fr/~msimonin/envs/snooze-ubuntu-net.env  -f $tmp_directory/full_hosts_list.txt  -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k"
+    kadeploy3 -a  http://public.sophia.grid5000.fr/~msimonin/snooze-ubuntu.env  -f $tmp_directory/full_hosts_list.txt  -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k 
 
     if [[ $? -ne $success_code ]]
     then
@@ -79,7 +80,7 @@ deploy_image_no_vlan () {
 
     create_hosts_list_no_vlan $job_id
     #$katapult_command -a $environment_location/$environment_name -f $tmp_directory/hosts_list.txt -l $USER --max-deploy-runs $max_deploy_runs --min-deployed-nodes $(get_total_cluster_size)
-    $katapult_command -e ubuntu-x64-br -l sbadia -f $tmp_directory/hosts_list.txt --max-deploy-runs $max_deploy_runs --min-deployed-nodes $(get_total_cluster_size)
+    kadeploy3 -a  http://public.sophia.grid5000.fr/~msimonin/snooze-ubuntu.env  -f $tmp_directory/hosts_list.txt  -o $tmp_directory/nodes_deployed.txt -k 
     if [[ $? -ne $success_code ]]
     then
         echo "$log_tag Did you connect to your job?!"
