@@ -36,6 +36,7 @@ source $scriptpath/scripts/dynamic_node_addition.sh
 source $scriptpath/scripts/prepare_service_node.sh
 source $scriptpath/scripts/storage_service_node.sh
 source $scriptpath/scripts/generate_iso_context.sh
+source $scriptpath/scripts/custom_topology.sh
 
 # Prints the usage information
 print_usage () {
@@ -53,6 +54,10 @@ print_usage () {
     echo "-l                        List the assigned cluster addresses"
     echo "-s                        Start cluster"
     echo "-k                        Stop cluster"
+    echo "-z |init [gms] [lcs]      Init custom topology with gms GM on each GM nodes and"
+    echo "   |dispatch              Dispatch the topology on node"
+    echo "   |start                 Start the custom topology cluster"
+    echo "   |stop                  Stop the custom topology cluster"
     echo "-o [amount] [interval]    Dynamically adds group managers"
     echo "-x [amount] [interval]    Dynamically adds local controllers"
     echo "-v [hostnames]            Simulate group manager failures"
@@ -116,7 +121,7 @@ autoconfig () {
 
 # Process the user input
 option_found=0
-while getopts ":rabhicfteglsko:x:v:" opt; do
+while getopts ":rabhicfteglsko:x:v:z:" opt; do
     option_found=1
     print_settings
 
@@ -170,6 +175,11 @@ while getopts ":rabhicfteglsko:x:v:" opt; do
             stop_cluster
             return_value=$?
             ;;
+        z)
+	    custom_topology $OPTARG
+            return_value=$?
+            ;;
+             
         o)
             number_of_group_managers=$OPTARG
             eval "interval=\${$OPTIND}"

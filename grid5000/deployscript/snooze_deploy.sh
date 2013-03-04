@@ -41,7 +41,9 @@ print_usage () {
 # Starts autoconfiguration
 autoconfig () {
     echo "$log_tag Starting in autoconfiguration mode! This can take some time, you might consider taking a coffee break :-)"
-    
+    echo "Deployment time" > $tmp_directory/deployment_time.txt
+    echo "Start of autoconfig | `date`" >> $tmp_directory/deployment_time.txt
+ 
     # Deployment
     if $multisite 
     then
@@ -66,8 +68,7 @@ autoconfig () {
         return $error_code
     fi
 
-      
-
+    echo "End of autoconfig | `date`" >> $tmp_directory/deployment_time.txt
 }
 
 # Process the user input
