@@ -81,16 +81,18 @@ destination_experiments_script_directory="$destination_snooze_directory/experime
 ### Cluster settings
 cluster_location="rennes"
 
+
 ### Deployment and installation related settings
 max_deploy_runs=3
-environment_location="$HOME/snoozeimages"
-environment_name="sid-x64-mpi-snooze-$cluster_location.env"
+environment_location="/home/msimonin/public/envs/"
+environment_name="snooze-ubuntu.env"
+environment_url=$environment_location/$environment_name
 
 ## Cluster settings 
 centralized_deployment=false
 number_of_bootstrap_nodes=1
-number_of_group_managers=2
-number_of_local_controllers=2
+number_of_group_managers=8
+number_of_local_controllers=0
 number_of_subnets=1
 
 # Deployment specific settings
