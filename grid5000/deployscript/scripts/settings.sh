@@ -95,7 +95,7 @@ environment_url=$environment_location/$environment_name
 centralized_deployment=false
 number_of_bootstrap_nodes=1
 number_of_group_managers=2
-number_of_local_controllers=20
+number_of_local_controllers=2
 number_of_subnets=1
 
 # Deployment specific settings
