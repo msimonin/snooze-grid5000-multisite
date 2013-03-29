@@ -23,14 +23,35 @@
 script_name=$(basename $0 .sh)
 author="Eugen Feller <eugen.feller@inria.fr>"
 log_tag="[Snooze-Experiments]"
-snooze_client_binary="/usr/bin/snoozeclient"
+snooze_client_command="/usr/bin/snoozeclient"
 
 ## Exit codes
 error_code=1
 success_code=0
 
 ## SSH settings
-ssh_private_key="$HOME/.ssh/id_rsa.sid"
+ssh_private_key="$HOME/.ssh/id_rsa"
+ssh_command="/usr/bin/ssh -i $ssh_private_key"
+
+## Python location
+python="/usr/bin/python"
+
+## SCP tsunami settings 
+scp_tsunami_command="/opt/scpTsunamiA.py"
+
+## SCP settings
+scp_command="/usr/bin/scp -p -r"
+
+## RSYNC settings
+export RSYNC_RSH=$ssh_command
+rsync_command="/usr/bin/rsync -arv --delete"
+
+## Usernames
+g5k_username="efeller"
+host_root_username="root"
+
+############# Snooze deployment settings ##############
+local_controllers_file="/tmp/service/snooze-grid5000-multisite/grid5000/deployscript/tmp/local_controllers.txt"
 
 ############# Virtual cluster related settings ########
 # User and group
@@ -38,33 +59,72 @@ snooze_user="snoozeadmin"
 snooze_group="snooze"
 
 ## Image and template locations
-images_location="/tmp/snooze/images"
-templates_location="/tmp/snooze/templates"
+snooze_tmp_directory="/tmp/snooze"
+images_location="$snooze_tmp_directory/images"
+templates_location="$snooze_tmp_directory/templates"
 
 ## Template name
 template_name="debian_kvm.xml"
 template_prefix="debian_kvm_"
 
 ## Image names
-backing_file_type="web"
+backing_file_distribution="squeeze"
+backing_file_application="mapreduce"
 backing_file_cluster_location="rennes"
-backing_file_name="testing-$backing_file_type-vm-snooze-$backing_file_cluster_location.raw"
-backing_file_name="debian-context.raw"
-copy_on_write_file_prefix="testing-$backing_file_type-vm-snooze-$backing_file_cluster_location-cow-"
-copy_on_write_file_prefix="$backing_file_name"
-
+backing_file_type="qcow2"
+backing_file_name="$backing_file_distribution-$backing_file_application-vm-snooze-$backing_file_cluster_location.$backing_file_type"
+backing_file_name="debian-hadoop-context-big.qcow2"
+copy_on_write_file_prefix="$backing_file_distribution-$backing_file_application-vm-snooze-$backing_file_cluster_location-cow-"
 
 # Context iso file
 context_image="context.iso"
 
-max_memory="2097152"
-current_memory="2097152"
+# VM settings
+max_memory="128000"
+current_memory="128000"
 number_of_virtual_cpus="1"
 
 # Networking settings
-bridge_name="br100"
+bridge_name="virbr0"
 
-########### Benchmark related settings #############
+########### MapReduce benchmark related settings ###############
+SYSTEM_TIME_COMMAND="/usr/bin/time -p"
+SYSTEM_SLEEP_TIME="120"
+# Hadoop MapReduce tuff
+HADOOP_MAPS="1000"
+HADOOP_REDUCES="500"
+HADOOP_USER="root"
+HADOOP_HOME="/opt/hadoop"
+HADOOP_BIN="export JAVA_HOME=/usr/lib/jvm/java-6-sun; export HADOOP_INSTALL=$HADOOP_HOME; $SYSTEM_TIME_COMMAND $HADOOP_HOME/bin/hadoop"
+HADOOP_RUN_JAR="$HADOOP_BIN jar"
+HADOOP_FS="$HADOOP_BIN fs"
+HADOOP_COPY_FROM_LOCAL="$HADOOP_BIN fs -copyFromLocal"
+HADOOP_BENCHMARKS="$HADOOP_HOME/hadoop-0.20.2-examples.jar"
+HADOOP_RESULTS="/mnt/results"
+
+# Teragen and terasort stuff
+TERAGEN_INPUT_SIZES="1000000000 5000000000 10000000000"
+TERASORT_INPUT_DIR="/data/terasort-input"
+TERASORT_OUTPUT_DIR="/data/terasort-output"
+TERASORT_RMDIR_INPUT="$HADOOP_FS -rmr $TERASORT_INPUT_DIR"
+TERASORT_RMDIR_OUTPUT="$HADOOP_FS -rmr $TERASORT_OUTPUT_DIR"
+TERAGEN_HADOOP_BIN="$HADOOP_RUN_JAR $HADOOP_BENCHMARKS teragen -Dmapred.map.tasks=$HADOOP_MAPS"
+TERASORT_HADOOP_BIN="$HADOOP_RUN_JAR $HADOOP_BENCHMARKS terasort -Dmapred.map.tasks=$HADOOP_MAPS -Dmapred.reduce.tasks=$HADOOP_REDUCES $TERASORT_INPUT_DIR $TERASORT_OUTPUT_DIR"
+
+# Wikipedia stuff
+WIKIBENCH_INPUT_DATA_DIR="/mnt/wikidata"
+WIKIBENCH_INPUT_DIR="/data/wikipedia-input"
+WIKIBENCH_OUTPUT_DIR="/data/wikipedia-output"
+WIKIBENCH_INPUT_FILE="enwiki-20120802-stub-meta-history.xml"
+WIKIBENCH_RMDIR_INPUT="$HADOOP_FS -rmr $WIKIBENCH_INPUT_DIR" 
+WIKIBENCH_RMDIR_OUTPUT="$HADOOP_FS -rmr $WIKIBENCH_OUTPUT_DIR"
+WIKIBENCH_MKDIR_INPUT="$HADOOP_FS -mkdir $WIKIBENCH_INPUT_DIR" 
+WIKIBENCH_HADOOP_BIN="$HADOOP_RUN_JAR $HADOOP_HOME/lbnl/wikiproc.jar"
+# In each run one more file $WIKIBENCH_INPUT_FILE is uploaded to HDFS
+WIKIBENCH_RUNS="0 1 2"
+WIKIBENCH_MODES="0 1 2"
+
+########### MPI and Web benchmark related settings #############
 # Temporary directory
 tmp_directory="./tmp"
 
@@ -80,10 +140,6 @@ results_output_directory="./results"
 # mpirun settings
 mpirun_output_file="$tmp_directory/mpirun_output.log"
 
-# Snooze client settings
-snoozeclient_output="$tmp_directory/snooze_client_out.txt"
-virtual_machine_hosts="$tmp_directory/virtual_machine_hosts.txt"
-
 # NAS Parallel Benchmark settings
 nas_processes_per_node=1
 nas_application="ft"
@@ -98,9 +154,24 @@ web_cuncurrency=100
 web_number_of_requests=1000
 web_gnuplot_output_file="$results_output_directory/web/web.dat"
 
-# Test case 1 settings
+#######################################################
+
+# Client output settings
+snoozeclient_output="$tmp_directory/snooze_client_out.txt"
+snoozeclient_output_formatted="$tmp_directory/snooze_client_formatted.txt"
+virtual_machine_hosts="$tmp_directory/virtual_machine_hosts.txt"
+
+# Submission test case settings
 number_of_virtual_clusters=11
 virtual_machine_interval=50
+
+# MapReduce test case settings
+mapreduce_script="./hadoop/src/suite.py"
+mapreduce_storage_jobid="430569"
+mapreduce_filter_compute_and_data_script="./scripts/filter_compute_data_nodes.py"
+mapreduce_data_nodes_file="./$tmp_directory/data_nodes.txt"
+mapreduce_compute_nodes_file="./$tmp_directory/compute_nodes.txt"
+mapreduce_master_node="$tmp_directory/hadoop_master_node.txt"
 
 # Prints the virtual cluster settings
 print_virtual_cluster_settings () {   
@@ -147,12 +218,3 @@ print_web_settings () {
     echo "$log_tag Output file: $web_gnuplot_output_file"
     echo "<-------------------------------------------------------------->"
 }
-
-# Prints the test case 1 settings
-print_test_case_1_settings () {
-    echo "<-------------------- Test case 1 settings -------------------->"
-    echo "$log_tag Number of virtual clusters: $number_of_virtual_clusters"
-    echo "$log_tag Virtual machine interval: $virtual_machine_interval" 
-    echo "<-------------------------------------------------------------->"
-}
-

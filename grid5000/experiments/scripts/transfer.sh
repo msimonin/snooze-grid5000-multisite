@@ -19,9 +19,27 @@
 # along with this program; if not, see <http://www.gnu.org/licenses>.
 #
 
-# Synchronized data using rsync
-synchronize_with_rsync () {
-    echo "$log_tag Synchronizing data $2 to directory $3 on node $1"
-    rsync -avz --delete -e "ssh -i $ssh_private_key" $2 root@$1:$3 > /dev/null 2>&1
+fix_permissions () {
+    echo "$log_tag Fixing permissions of directory $2 on remote host $1"
+    $ssh_command $1 "chown -R $snooze_user:$snooze_group $2"
 }
 
+# Synchronized data using rsync
+synchronize_with_rsync () {
+    echo "$log_tag Synchronizing data $2 to directory $3 on node $1 RSYNC"
+    $rsync_command $2 $host_root_username@$1:$3 > /dev/null 2>&1
+}
+
+# Synchronized data using scp
+synchronize_with_scp () {
+    echo "$log_tag Synchronizing data $2 to directory $3 on node $1 with SCP"
+    $scp_command $2 $host_root_username@$1:$3 > /dev/null 2>&1
+    fix_permissions $1 $3
+}
+
+synchronize_with_tsunami (){
+    echo "$log_tag Synchronizing data $1 to directory $2 with TSUNAMI"
+    # zip the directory
+    tar -zcf /tmp/bases.tar.gz $1
+    $scp_tsunami_command /tmp/bases.tar.gz /bases.tar.gz -u root -f $local_controllers_file
+}

@@ -22,29 +22,35 @@ source $scriptpath/scripts/settings.sh
 source $scriptpath/scripts/cow_images.sh
 source $scriptpath/scripts/templates.sh
 source $scriptpath/scripts/cluster.sh
+source $scriptpath/scripts/grid5000.sh
+source $scriptpath/scripts/image_propagation.sh
 source $scriptpath/scripts/nas_parallel_benchmark.sh
 source $scriptpath/scripts/web.sh
 source $scriptpath/scripts/permissions.sh
-source $scriptpath/scripts/test_cases.sh
-
+source $scriptpath/scripts/submission_test_case.sh
+source $scriptpath/scripts/mapreduce_benchmark.sh
 
 # Prints the usage information
 print_usage () {
     echo "Usage: $script_name [options]"
     echo "Contact: $author"
     echo "Options:"
-    echo "-c  [name]  [nVMs]            Create virtual cluster"
-    echo "-s  [name]                    Start virtual cluster"
-    echo "-d  [name]                    Destroy virtual cluster"
-    echo "-r  [name]                    Remove virtual cluster"
-    echo "-t  [create/start/remove]     Test case 1"
-    echo "-n  [sync/run]                Start NPB (NAS Parallel Benchmark)"
-    echo "-w  [hostname]                Start web benchmark (Pressflow)"
+    echo "-p                                             Extract G5K machines list"
+    echo "-b                                             Propagate VM base image"
+    echo "-c  [name]  [nVMs]                             Create virtual cluster"
+    echo "-i  [name]                                     Propagate virtual cluster"
+    echo "-s  [name]                                     Start virtual cluster"
+    echo "-d  [name]                                     Destroy virtual cluster"
+    echo "-r  [name]                                     Remove virtual cluster"
+    echo "-t  [create/start/remove]                      Submission test case"
+    echo "-m  [start/auto/storage/configure/benchmark]   Start MapReduce benchmark"
+    echo "-n  [sync/run]                                 Start NPB (NAS Parallel Benchmark)"
+    echo "-w  [hostname]                                 Start web benchmark (Pressflow)"
 }
 
 # Process the user input
 option_found=0
-while getopts ":c:s:d:r:t:n:w:" opt; do
+while getopts ":c:bi:s:d:r:t:pm:n:w:" opt; do
     option_found=1
     case $opt in
         c)
@@ -53,6 +59,14 @@ while getopts ":c:s:d:r:t:n:w:" opt; do
             eval "number_of_virtual_machines=\${$OPTIND}"
             shift 2
             prepare_and_create_virtual_cluster $name $number_of_virtual_machines
+            return_value=$?
+            ;;
+        b)
+            propagate_base_image
+            return_value=$?
+            ;;
+        i)
+            propagate_virtual_cluster $OPTARG
             return_value=$?
             ;;
         s)
@@ -68,8 +82,15 @@ while getopts ":c:s:d:r:t:n:w:" opt; do
             return_value=$?
             ;;
         t)
-            print_test_case_1_settings
-            test_case_1 $OPTARG
+            start_submission_test_case $OPTARG
+            return_value=$?
+            ;;
+        p)
+            extract_g5k_machines
+            return_value=$?
+            ;;
+        m)
+            start_mapreduce_benchmark $OPTARG
             return_value=$?
             ;;
         n)

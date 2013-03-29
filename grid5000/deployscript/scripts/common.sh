@@ -173,11 +173,11 @@ get_first_bootstrap_address() {
 save_virtual_machine_subnet() {
     local virtual_machine_subnet=$(g5k-subnets -j $1 -a | awk '{print $1}' | sed 's/\//\\\//g' | head -n1)    
     echo $virtual_machine_subnet > $tmp_directory/subnet.txt
-    gateway=$(g5k-subnets -j $1 -a | awk '{print $4}') 
-    network=$(g5k-subnets -j $1 -a | awk '{print $5}') 
-    broadcast=$(g5k-subnets -j $1 -a | awk '{print $2}') 
-    netmask=$(g5k-subnets -j $1 -a | awk '{print $3}') 
-    nameserver=$(g5k-subnets -j $1 -a | awk '{print $4}') 
+    gateway=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
+    network=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $5}') 
+    broadcast=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $2}') 
+    netmask=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $3}') 
+    nameserver=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
     echo "GATEWAY=$gateway" > $tmp_directory/common_network.txt
     echo "NETWORK=$network" >> $tmp_directory/common_network.txt
     echo "BROADCAST=$broadcast" >> $tmp_directory/common_network.txt

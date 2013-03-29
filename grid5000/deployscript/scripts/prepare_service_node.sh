@@ -22,7 +22,21 @@
 
 prepare_service_node()
 {
- 
+
+
+   local job_id=$(get_job_id)
+   if [ -z "$job_id" ];
+   then
+     echo "$log_tag Did you connect to your job?!"
+   fi
+   
+   local virtual_machine_subnet=$(save_virtual_machine_subnet $job_id)   
+   if [ -z "$virtual_machine_subnet" ];
+   then
+     echo "$log_tag You must have a reservation with a subnet reserved!"
+     return $error_code
+   fi
+
   copy_and_deploy_keys
 
   install_taktuk
@@ -30,9 +44,9 @@ prepare_service_node()
  
   copy_files
 
-  if $multisite; then
-    add_route_rules_on_nodes
-  fi
+  tuning_arp_on_nodes 
+  
+  changing_settings_file
 
   echo "$log_tag +------------------------------------------------"
   echo "$log_tag | Service node is : `cat $tmp_directory/service_node.txt `"
@@ -43,9 +57,7 @@ prepare_snooze_system_and_launch()
 {
 
   echo "$log_tag Launching the snooze system from : `cat $tmp_directory/service_node.txt `"
-  # modify path to sthe script settings
-  perl -p -e "s#^base_directory.*#base_directory=\"$exported_directory_service_node\"#" "$deploy_script_directory/scripts/settings.sh" > $tmp_directory/settings.sh
-  put_taktuk "$tmp_directory/service_node.txt" "$tmp_directory/settings.sh" "$exported_directory_service_node/$relative_script_directory/scripts/settings.sh" 
+
   # Launch the deployment from the service
   echo "$log_tag $exported_directory_service_node/$relative_script_directory/service_node.sh -a"
   service_node=`cat $tmp_directory/service_node.txt`  
@@ -105,10 +117,15 @@ copy_files(){
   rsync --progress -avz $source_images_directory root@$service_node:$exported_directory_service_node/.
 }
 
-add_route_rules_on_nodes(){
-   echo "$log_tag "Adding route rules to nodes"" 
-  
-  source "$tmp_directory/common_network.txt"
-  run_taktuk "$tmp_directory/service_node.txt" exec "[ route add -net $NETWORK netmask $NETMASK dev br100 ]" 
-  run_taktuk "$tmp_directory/hosts_list.txt" exec "[ route add -net $NETWORK netmask $NETMASK dev br100 ]" 
+tuning_arp_on_nodes(){
+  echo "$log_tag "Tuning ARP on nodes"" 
+  run_taktuk "$tmp_directory/hosts_list.txt" exec "[ echo 4096 > /proc/sys/net/ipv4/neigh/default/gc_thresh3 ]"
+  run_taktuk "$tmp_directory/hosts_list.txt" exec "[ echo 2048 > /proc/sys/net/ipv4/neigh/default/gc_thresh2 ]"
+  run_taktuk "$tmp_directory/hosts_list.txt" exec "[ echo 1024 > /proc/sys/net/ipv4/neigh/default/gc_thresh1 ]"
+}
+
+changing_settings_file(){
+  # modify path to sthe script settings
+  perl -p -e "s#^base_directory.*#base_directory=\"$exported_directory_service_node\"#" "$deploy_script_directory/scripts/settings.sh" > $tmp_directory/settings.sh
+  put_taktuk "$tmp_directory/service_node.txt" "$tmp_directory/settings.sh" "$exported_directory_service_node/$relative_script_directory/scripts/settings.sh" 
 }

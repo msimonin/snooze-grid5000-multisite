@@ -22,8 +22,8 @@
 # Adds virtual cluster directories
 create_virtual_custer_directories () {
     echo "$log_tag Creating virtual cluster directories for $1"
-    mkdir "$images_location/$1" > /dev/null 2>&1
-    mkdir "$templates_location/$1" > /dev/null 2>&1
+    mkdir -p "$images_location/$1" > /dev/null 2>&1
+    mkdir -p "$templates_location/$1" > /dev/null 2>&1
 }
 
 # Removes the virtual cluster directories
@@ -64,7 +64,7 @@ prepare_and_create_virtual_cluster () {
 # Creates the virtual cluster
 create_virtual_cluster () {
     echo "$log_tag Creating virtual cluster $1"
-    $snooze_client_binary define -vcn $1
+    $snooze_client_command define -vcn $1
     if [[ $? -ne $success_code ]]
     then
         return $error_code
@@ -72,7 +72,7 @@ create_virtual_cluster () {
     
     for (( I=0; $I < $2; I++ ))
     do
-        $snooze_client_binary add -vcn $1 -vmt "$templates_location/$1/$template_prefix$1_$I.xml" 
+        $snooze_client_command add -vcn $1 -vmt "$templates_location/$1/$template_prefix$1_$I.xml" 
     done 
 }
 
@@ -80,20 +80,23 @@ create_virtual_cluster () {
 start_virtual_cluster ()
 {
     echo "$log_tag Starting virtual cluster: $1"
-    $snooze_client_binary start -vcn $1 > $snoozeclient_output
+    echo "$snooze_client_command start -vcn $1 > $snoozeclient_output"
+    $snooze_client_command start -vcn $1 > $snoozeclient_output
+    format_snooze_output
+    generate_virtual_machine_hosts_list
 }
 
 # Destroy the virtual cluster
 destroy_virtual_cluster ()
 {
     echo "$log_tag Destroy virtual cluster: $1"
-    $snooze_client_binary destroy -vcn $1
+    $snooze_client_command destroy -vcn $1
 }
 
 # Removes the virtual cluster
 remove_virtual_cluster () {
     echo "$log_tag Removing virtual cluster $1"
-    $snooze_client_binary undefine -vcn $1
+    $snooze_client_command undefine -vcn $1
     if [[ $? -ne $success_code ]]
     then
         return $error_code

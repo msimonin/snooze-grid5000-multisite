@@ -21,8 +21,8 @@
 
 propagate_base_image() {
     echo "$log_tag Starting images propagation for $1"
-    #$scp_tsunami_command $images_location/$backing_file_name $images_location/$backing_file_name -u root -f $local_controllers_file 
-    #$scp_tsunami_command $images_location/$context_image $images_location/$context_image -u root -f $local_controllers_file 
+    $scp_tsunami_command $images_location/$backing_file_name $images_location/$backing_file_name -u root -f $local_controllers_file 
+    $scp_tsunami_command $images_location/$context_image $images_location/$context_image -u root -f $local_controllers_file 
 }
 
 propagate_virtual_cluster() {

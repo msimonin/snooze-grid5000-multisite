@@ -48,6 +48,7 @@ print_usage () {
     echo "-i                        Install/Update packages"
     echo "-c                        Configure packages"
     echo "-f                        Configure storage"
+    echo "-n                        Configure network (create virbr0 bridge and routes)"
     echo "-g                        Generate ISO context file"
     echo "-t                        Transfer backing virtual machine image and context file"
     echo "-e                        Transfer experiments script"
@@ -85,6 +86,12 @@ autoconfig () {
     then
         return $error_code
     fi
+    
+    configure_network
+    if [[ $? -ne $success_code ]]
+    then
+       return $error_code
+    fi
 
     configure_storage
     if [[ $? -ne $success_code ]]
@@ -121,7 +128,7 @@ autoconfig () {
 
 # Process the user input
 option_found=0
-while getopts ":rabhicfteglsko:x:v:z:" opt; do
+while getopts ":rnabhicfteglsko:x:v:z:" opt; do
     option_found=1
     print_settings
 
@@ -137,6 +144,10 @@ while getopts ":rabhicfteglsko:x:v:z:" opt; do
             ;;
         h)
             configure_storage_for_service_node
+            return_value=$?
+            ;;
+        f)
+            configure_storage
             return_value=$?
             ;;
         i)

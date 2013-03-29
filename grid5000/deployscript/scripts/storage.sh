@@ -22,6 +22,11 @@ configure_storage () {
     echo "$log_tag Starting the storage configuration procedure"
 
     # Prepares the environment (create snooze directory)
+    if [ "$storage_type" == "local" ]; then
+        run_taktuk "$tmp_directory/hosts_list.txt" exec "[ $remote_scripts_directory/prepare_environment.sh ]"
+        return $?
+    fi
+
     run_taktuk "$tmp_directory/bootstrap_nodes.txt" exec "[ $remote_scripts_directory/prepare_environment.sh ]"
     
     # Starts NFS server configuration

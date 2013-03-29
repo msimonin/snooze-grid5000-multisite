@@ -70,7 +70,6 @@ run_benchmark () {
 # Starts the nas parallel benchmark
 start_nas_parallel_benchmark () {
     echo "$log_tag Starting NAS parallel benchmark: $1"
-    generate_virtual_machine_hosts_list
     case "$1" in
     'sync') echo "$log_tag Synchronizing the benchmark"
         synchronize_benchmark
