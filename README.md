@@ -8,7 +8,10 @@ The Snooze Grid`5000 multi site deployement script
 
         (frontend)$ oargridsub -t deploy -w 1:00:00 rennes:rdef="{\\\\\\\"type='kavlan-global'\\\\\\\"}/vlan=1+/slash_22=1+/nodes=3",lyon:rdef=/nodes=3,sophia:rdef=/nodes=3 > ~/oargrid.out
 
-NB : the file oargrid.out is used by the script so it must be placed in your home directory.
+NB1 : On a single site you don't need to reserve a vlan. The reservation could be : 
+        (frontend)$ oarsub -I -t deploy -l slash_22=1,{"cluster='parapluie'"}nodes=10,walltime=8
+
+NB2 : the file oargrid.out is used by the script so it must be placed in your home directory.
 
 
 If everything is fine this file looks like : 
