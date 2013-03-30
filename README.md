@@ -10,7 +10,7 @@ The Snooze Grid`5000 multi site deployement script
 
 NB1 : On a single site you don't need to reserve a vlan. The reservation could be : 
 
-        (frontend)$ oarsub -I -t deploy -l slash_22=1,{"cluster='parapluie'"}nodes=10,walltime=8
+        (frontend)$ oarsub -I -t deploy -l slash_22=1,nodes=10,walltime=8
 
 NB2 : the file oargrid.out is used by the script so it must be placed in your home directory.
 
