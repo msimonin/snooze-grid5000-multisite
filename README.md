@@ -12,7 +12,7 @@ NB1 : On a single site you don't need to reserve a vlan. The reservation could b
 
         (frontend)$ oarsub -I -t deploy -l slash_22=1,nodes=10,walltime=8
 
-NB2 : the file oargrid.out is used by the script so it must be placed in your home directory.
+NB2 : Wit a multisite reservation, the file oargrid.out is used by the script so it must be placed in your home directory.
 
 
 If everything is fine this file looks like : 
