@@ -54,7 +54,6 @@ Other packages could be found in https://ci.inria.fr/snooze-software/.
         (frontend)$ vi scripts/settings.sh
 
         multisite=true|false
-  	[...]
         number_of_bootstrap_nodes=1
         number_of_group_managers=2
         number_of_local_controllers=5
