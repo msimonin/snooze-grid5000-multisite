@@ -48,11 +48,13 @@ If everything is fine this file looks like :
 
 Other packages could be found in https://ci.inria.fr/snooze-software/.
 
-* Configure the number of nodes in the **settings.sh**.
+* Configure the number of nodes in the **settings.sh** and the deployment type : 
 
         (frontend)$ cd ~/snooze-grid5000-multisite/grid5000/deployscript/
         (frontend)$ vi scripts/settings.sh
 
+        multisite=true|false
+  	[...]
         number_of_bootstrap_nodes=1
         number_of_group_managers=2
         number_of_local_controllers=5
