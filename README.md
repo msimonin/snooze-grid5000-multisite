@@ -54,7 +54,6 @@ Other packages could be found in https://ci.inria.fr/snooze-software/.
         (frontend)$ vi scripts/settings.sh
 
         multisite=true|false
-  	[...]
         number_of_bootstrap_nodes=1
         number_of_group_managers=2
         number_of_local_controllers=5
@@ -92,7 +91,7 @@ The first bootstrap node hosts some helper to launch VMs.
 These commands will create and start 10 VMs.
 
 * Visualizing the system : 
-Make a tunnel from your laptop to the bootstrap through the grid'5000 frontend on port 5000. If snoozeclient is installed on your PC, you can launch :
+Make a tunnel (or export your display) from your laptop to the bootstrap through the grid'5000 frontend on port 5000. If snoozeclient is installed on your PC, you can launch :
 
         (PC) snoozeclient visualize.
 
