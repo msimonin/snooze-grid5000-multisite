@@ -24,6 +24,7 @@ source $scriptpath/scripts/templates.sh
 source $scriptpath/scripts/cluster.sh
 source $scriptpath/scripts/grid5000.sh
 source $scriptpath/scripts/image_propagation.sh
+source $scriptpath/scripts/taktuk.sh
 source $scriptpath/scripts/nas_parallel_benchmark.sh
 source $scriptpath/scripts/web.sh
 source $scriptpath/scripts/permissions.sh

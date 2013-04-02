@@ -80,7 +80,7 @@ destination_experiments_script_directory="$destination_snooze_directory/experime
 
 ### Cluster settings
 cluster_location="rennes"
-storage_type="nfs" # other value will configure nfs on other nodes
+storage_type="nfs" # set it to local if you don't want nfs share
 configure_bridge=true
 bridge="virbr0"
 
