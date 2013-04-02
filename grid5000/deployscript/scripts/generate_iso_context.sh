@@ -28,12 +28,13 @@ save_kavlan_settings() {
 }
 
 generate_iso_context() {
+   cp -r $deploy_script_directory/context $tmp_directory/context
+
    if $multisite; then
      save_kavlan_settings
    cp $tmp_directory/common_routes.txt $tmp_directory/context/common/routes
    fi
  
-   cp -r $deploy_script_directory/context $tmp_directory/context
    cp $tmp_directory/common_network.txt $tmp_directory/context/common/network
 
    genisoimage -RJ -o $tmp_directory/context.iso $tmp_directory/context
