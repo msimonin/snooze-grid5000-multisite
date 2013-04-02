@@ -32,6 +32,7 @@ success_code=0
 ## SSH settings
 ssh_private_key="$HOME/.ssh/id_rsa"
 ssh_command="/usr/bin/ssh -i $ssh_private_key"
+ssh_command_taktuk="ssh -o PasswordAuthentication=no -o StrictHostKeyChecking=no -i $ssh_private_key"
 
 ## Python location
 python="/usr/bin/python"

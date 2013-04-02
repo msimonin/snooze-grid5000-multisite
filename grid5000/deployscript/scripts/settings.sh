@@ -50,7 +50,7 @@ ssh_command="ssh -o PasswordAuthentication=no -o StrictHostKeyChecking=no -i $ss
 tmp_directory="$deploy_script_directory/tmp"
 
 ## Config names 
-kapower_config_name="client_conf"
+kapower_config_name="client_conf.yml"
 zookeeper_config_name="zoo.cfg"
 zookeeper_myid="myid"
 client_config_name="snooze_client.cfg"

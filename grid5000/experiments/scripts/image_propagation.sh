@@ -28,10 +28,7 @@ propagate_base_image() {
 propagate_virtual_cluster() {
     echo "$log_tag Starting virtual cluster $1 images propagation"
     synchronize_with_tsunami $images_location/$1 $images_location
-    for local_controller in `cat $local_controllers_file`
-    do
-       $ssh_command $local_controller  "cd / ; tar -xzf /bases.tar.gz" 
-       fix_permissions $local_controller $images_location
-    done
     
+    run_taktuk $local_controllers_file exec "[ cd / ; tar -xzf /bases.tar.gz ]"
+    run_taktuk $local_controllers_file exec "[ chown -R $snooze_user:$snooze_group $images_location ]"
 }
