@@ -61,7 +61,7 @@ prepare_snooze_system_and_launch()
   # Launch the deployment from the service
   echo "$log_tag $exported_directory_service_node/$relative_script_directory/service_node.sh -a"
   service_node=`cat $tmp_directory/service_node.txt`  
-  run_taktuk_single_machine "$service_node" exec "[ $exported_directory_service_node/$relative_script_directory/service_node.sh -a ]"    
+  run_taktuk_single_machine "$service_node" exec "[ $exported_directory_service_node/$relative_script_directory/service_node.sh -a 2> /dev/null ]"     
 }
 generate_keys()
 {

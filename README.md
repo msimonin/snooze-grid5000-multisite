@@ -8,7 +8,11 @@ The Snooze Grid`5000 multi site deployement script
 
         (frontend)$ oargridsub -t deploy -w 1:00:00 rennes:rdef="{\\\\\\\"type='kavlan-global'\\\\\\\"}/vlan=1+/slash_22=1+/nodes=3",lyon:rdef=/nodes=3,sophia:rdef=/nodes=3 > ~/oargrid.out
 
-NB : the file oargrid.out is used by the script so it must be placed in your home directory.
+NB1 : On a single site you don't need to reserve a vlan. The reservation could be : 
+
+        (frontend)$ oarsub -I -t deploy -l slash_22=1,nodes=10,walltime=8
+
+NB2 : With a multisite reservation, the file oargrid.out is used by the script so it must be placed in your home directory.
 
 
 If everything is fine this file looks like : 
@@ -44,11 +48,12 @@ If everything is fine this file looks like :
 
 Other packages could be found in https://ci.inria.fr/snooze-software/.
 
-* Configure the number of nodes in the **settings.sh**.
+* Configure the number of nodes in the **settings.sh** and the deployment type : 
 
         (frontend)$ cd ~/snooze-grid5000-multisite/grid5000/deployscript/
         (frontend)$ vi scripts/settings.sh
 
+        multisite=true|false
         number_of_bootstrap_nodes=1
         number_of_group_managers=2
         number_of_local_controllers=5
@@ -86,7 +91,7 @@ The first bootstrap node hosts some helper to launch VMs.
 These commands will create and start 10 VMs.
 
 * Visualizing the system : 
-Make a tunnel from your laptop to the bootstrap through the grid'5000 frontend on port 5000. If snoozeclient is installed on your PC, you can launch :
+Make a tunnel (or export your display) from your laptop to the bootstrap through the grid'5000 frontend on port 5000. If snoozeclient is installed on your PC, you can launch :
 
         (PC) snoozeclient visualize.
 
