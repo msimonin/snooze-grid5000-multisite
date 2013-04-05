@@ -54,11 +54,13 @@ Other packages could be found in https://ci.inria.fr/snooze-software/.
         (frontend)$ vi scripts/settings.sh
 
         multisite=true|false
+        storage_type="nfs|local"
         number_of_bootstrap_nodes=1
         number_of_group_managers=2
         number_of_local_controllers=5
 
 NB : Since we use a "service node" for the deployment you will get a Snooze cluster running with n-1 nodes.
+NB2 : If you set storage type to "local", the VMs base images will be propagated by scp-tsunami, you have to install it in /opt of the first bootstrap (see settings.sh of experiments scripts).
 
 * Retrieve VMs base images in **~/vmimages/**
 You can get my debian base image in /home/msimonin/vmimages in Rennes
