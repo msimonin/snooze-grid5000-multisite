@@ -80,7 +80,7 @@ destination_experiments_script_directory="$destination_snooze_directory/experime
 
 ### Cluster settings
 cluster_location="rennes"
-storage_type="nfs" # set it to local if you don't want nfs share
+storage_type="local" # set it to local if you don't want nfs share
 configure_bridge=true
 bridge="virbr0"
 
@@ -95,7 +95,7 @@ environment_url=$environment_location/$environment_name
 centralized_deployment=false
 number_of_bootstrap_nodes=1
 number_of_group_managers=2
-number_of_local_controllers=3
+number_of_local_controllers=2
 number_of_subnets=1
 
 # Deployment specific settings
