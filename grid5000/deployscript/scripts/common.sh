@@ -171,8 +171,8 @@ get_first_bootstrap_address() {
 
 # Saves the virtual machine subnet configuration (from the frontal)
 save_virtual_machine_subnet() {
-    local virtual_machine_subnet=$(g5k-subnets -j $1 -a | awk '{print $1}' | sed 's/\//\\\//g' | head -n1)    
-    echo $virtual_machine_subnet > $tmp_directory/subnet.txt
+    local virtual_machine_subnet=$(g5k-subnets -j $1 -a | awk '{print $1}' | sed 's/\//\\\//g' )    
+    echo $virtual_machine_subnet | sed s/" "/","/g > $tmp_directory/subnet.txt    
     gateway=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
     network=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $5}') 
     broadcast=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $2}') 
@@ -187,7 +187,7 @@ save_virtual_machine_subnet() {
 }
 
 
-# Returns the subnets of a job
+# Returns the subnets of a job (list of coma separated cidr notation subnets)
 get_virtual_machine_subnet () 
 {
     #local virtual_machine_subnet=$(g5k-subnets -j $1 -a | awk '{print $1}' | sed 's/\//\\\//g' | head -n1)    
