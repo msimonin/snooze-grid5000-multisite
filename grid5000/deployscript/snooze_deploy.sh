@@ -26,6 +26,7 @@ source $scriptpath/scripts/deployment.sh
 source $scriptpath/scripts/taktuk.sh
 source $scriptpath/scripts/prepare_service_node.sh
 source $scriptpath/scripts/storage_service_node.sh
+source $scriptpath/scripts/report.sh
 
 # Prints the usage information
 print_usage () {
@@ -36,6 +37,7 @@ print_usage () {
     echo "-d                        Deploy image"
     echo "-h                        Prepare the service node"
     echo "-l                        Prepare and launch snooze system"
+    echo "-r                        Report"
 }
 
 # Starts autoconfiguration
@@ -68,12 +70,19 @@ autoconfig () {
         return $error_code
     fi
 
+    report
+    if [[ $? -ne $success_code ]]
+    then
+        return $error_code
+    fi
+    
+
     echo "End of autoconfig | `date`" >> $tmp_directory/deployment_time.txt
 }
 
 # Process the user input
 option_found=0
-while getopts ":adhl" opt; do
+while getopts ":adhlr" opt; do
     option_found=1
     print_settings
 
@@ -101,6 +110,11 @@ while getopts ":adhl" opt; do
         l) 
            echo "Preparing and launching the snooze system"
            prepare_snooze_system_and_launch
+           return_value=$?
+           ;;
+        r) 
+           echo "End of the deployment"
+           report
            return_value=$?
            ;;
         \?)

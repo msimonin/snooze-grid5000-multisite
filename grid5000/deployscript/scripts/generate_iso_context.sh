@@ -32,7 +32,9 @@ generate_iso_context() {
 
    if $multisite; then
      save_kavlan_settings
-   cp $tmp_directory/common_routes.txt $tmp_directory/context/common/routes
+     cp $tmp_directory/common_routes.txt $tmp_directory/context/common/routes
+   else 
+     echo "" > $tmp_directory/context/common/routes
    fi
  
    cp $tmp_directory/common_network.txt $tmp_directory/context/common/network
