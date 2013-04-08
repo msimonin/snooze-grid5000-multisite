@@ -95,7 +95,7 @@ HADOOP_SET_NUMBER_OF_MAPS = "-Dmapred.map.tasks="
 HADOOP_SET_NUMBER_OF_REDUCES = "-Dmapred.reduce.tasks="
 HADOOP_FORMAT_DFS = HADOOP_BIN + "namenode -format"
 HADOOP_START_TEST_BENCHMARK = HADOOP_START_COMMAND + HADOOP_INSTALL_DIR + "/hadoop-" + \
-                              HADOOP_VERSION + "-test.jar" + WHITESPACE
+                              "test-"  + HADOOP_VERSION + ".jar" + WHITESPACE
 HADOOP_START_EXAMPLE_BENCHMARK = HADOOP_START_COMMAND + HADOOP_INSTALL_DIR +"/hadoop-" + \
                                  "examples-" + HADOOP_VERSION + ".jar" + WHITESPACE
 HADOOP_START_DFS = HADOOP_SYSTEM_ENV + HADOOP_INSTALL_DIR + "/bin/start-dfs.sh"
