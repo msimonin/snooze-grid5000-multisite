@@ -37,6 +37,7 @@ source $scriptpath/scripts/prepare_service_node.sh
 source $scriptpath/scripts/storage_service_node.sh
 source $scriptpath/scripts/generate_iso_context.sh
 source $scriptpath/scripts/custom_topology.sh
+source $scriptpath/scripts/rabbitmq.sh
 
 # Prints the usage information
 print_usage () {
@@ -51,6 +52,7 @@ print_usage () {
     echo "-n                        Configure network (create virbr0 bridge and routes)"
     echo "-g                        Generate ISO context file"
     echo "-t                        Transfer backing virtual machine image and context file"
+    echo "-r                        Install et configure rabbitmq"
     echo "-e                        Transfer experiments script"
     echo "-l                        List the assigned cluster addresses"
     echo "-s                        Start cluster"
@@ -111,6 +113,12 @@ autoconfig () {
         return $error_code
     fi
     
+    install_and_configure_rabbitmq
+    if [[ $? -ne $success_code ]]
+    then
+        return $error_code
+    fi
+
     transfer_experiments_script
     if [[ $? -ne $success_code ]]
     then
@@ -164,6 +172,10 @@ while getopts ":rnabhicfteglsko:x:v:z:" opt; do
             ;;
         g)
             generate_iso_context
+            return_value=$?
+            ;;
+        r)
+            install_and_configure_rabbitmq
             return_value=$?
             ;;
         t)

@@ -75,3 +75,11 @@ nfs_exports="$exported_directory *(rw,async,no_subtree_check,no_root_squash)"
 
 exported_directory_service_node="/tmp/service"
 nfs_exports_service_node="$exported_directory_service_node *(rw,async,no_subtree_check,no_root_squash)"
+
+# Rabbitmq settings
+rabbitmq_user="snooze"
+rabbitmq_password="snooze"
+rabbitmq_vhost="snooze-vhost"
+rabbitmq_permissions_resource=".*"
+rabbitmq_permissions_read=".*"
+rabbitmq_permissions_write=".*"

@@ -41,13 +41,14 @@ prepare_service_node()
 
   install_taktuk
   install_genisoimage
+  install_rabbitmq
  
   copy_files
 
   tuning_arp_on_nodes 
   
   changing_settings_file
-
+ 
   echo "$log_tag +------------------------------------------------"
   echo "$log_tag | Service node is : `cat $tmp_directory/service_node.txt `"
   echo "$log_tag +------------------------------------------------"
@@ -107,6 +108,11 @@ install_taktuk(){
 install_genisoimage(){
  echo "$log_tag Installing taktuk on service node `cat $tmp_directory/service_node.txt`" 
  run_taktuk "$tmp_directory/service_node.txt" exec "[ apt-get install -y --force-yes genisoimage ]"
+}
+
+install_genisoimage(){
+ echo "$log_tag Installing taktuk on service node `cat $tmp_directory/service_node.txt`" 
+ run_taktuk "$tmp_directory/service_node.txt" exec "[ apt-get install -y --force-yes rabbitmq-server ]"
 }
 
 copy_files(){

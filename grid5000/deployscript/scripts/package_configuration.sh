@@ -135,10 +135,11 @@ create_and_deploy_distributed_group_manager_configurations () {
     local virtual_machine_subnet=$(get_virtual_machine_subnet $job_id)   
     local group_manager_heartbeat_mcast_port=$start_group_manager_heartbeat_mcast_port
     local zookeeper_addresses=$(generate_zookeeper_addresses)
+    local rabbitmq_server=`cat $tmp_directory/rabbitmq_server.txt`
     
     for group_manager_address in $(cat "$tmp_directory/group_managers.txt"); do
         echo "$log_tag Creating and deploying group manager configuration for $group_manager_address as $node_config_name"
-        create_group_manager_configuration $virtual_machine_subnet $start_control_data_port $start_monitoring_data_port $group_manager_heartbeat_mcast_port $zookeeper_addresses             
+        create_group_manager_configuration $virtual_machine_subnet $start_control_data_port $start_monitoring_data_port $group_manager_heartbeat_mcast_port $zookeeper_addresses             $rabbitmq_server 
         deploy_group_manager_configuration $group_manager_address $node_config_name
         group_manager_heartbeat_mcast_port=$(($group_manager_heartbeat_mcast_port+1))
     done 
@@ -146,9 +147,10 @@ create_and_deploy_distributed_group_manager_configurations () {
 
 # Creates and deploys local controller configs
 create_and_deploy_local_controller_configuration () {
+    local rabbitmq_server=`cat $tmp_directory/rabbitmq_server.txt`
     for local_controller_address in $(cat "$tmp_directory/local_controllers.txt"); do
         echo "$log_tag Creating and deploying local controller configuration for $local_controller_address"
-        create_local_controller_configuration $local_controller_address
+        create_local_controller_configuration $local_controller_address $rabbitmq_server
         deploy_local_controller_configuration $local_controller_address
     done 
 }
@@ -185,11 +187,12 @@ create_client_configuration () {
 create_bootstrap_configuration () {
     sed 's/^node.role.*/node.role = bootstrap/g' "$config_templates_directory/$node_config_name" > "$tmp_directory/snooze_node_bs.cfg" 
     perl -pi -e "s/^network.listen.controlDataPort..*/network.listen.controlDataPort = $1/" "$tmp_directory/$client_config_name" 
+    perl -pi -e "s/^monitoring.external.address.*/monitoring.external.address = $2/" "$tmp_directory/snooze_node_bs.cfg"
 }
 
 # Creates group manager config
 create_group_manager_configuration () {
-    echo "$log_tag Configuring group manager with parameters $1, $2, $3, $4, $5"
+    echo "$log_tag Configuring group manager with parameters $1, $2, $3, $4, $5, $6"
         
     sed 's/^node.role .*/node.role = groupmanager/g' "$config_templates_directory/$node_config_name" > "$tmp_directory/snooze_node_gm.cfg" 
     perl -pi -e "s/^faultTolerance.zookeeper.hosts.*/faultTolerance.zookeeper.hosts = $5/" "$tmp_directory/snooze_node_gm.cfg"
@@ -198,12 +201,14 @@ create_group_manager_configuration () {
     perl -pi -e "s/^network.listen.monitoringDataPort.*/network.listen.monitoringDataPort = $3/" "$tmp_directory/snooze_node_gm.cfg"
     perl -pi -e "s/^network.multicast.address.*/network.multicast.address = $multicast_address/" "$tmp_directory/snooze_node_gm.cfg"
     perl -pi -e "s/^network.multicast.groupManagerHeartbeatPort.*/network.multicast.groupManagerHeartbeatPort = $4/" "$tmp_directory/snooze_node_gm.cfg"
+    perl -pi -e "s/^monitoring.external.address.*/monitoring.external.address = $6/" "$tmp_directory/snooze_node_gm.cfg"
 }
 
 #Creates local controller config
 create_local_controller_configuration () {
     sed 's/^node.role.*/node.role = localcontroller/g' "$config_templates_directory/$node_config_name" > "$tmp_directory/snooze_node_lc.cfg" 
     perl -pi -e "s/^energyManagement.drivers.wakeup.options.*/energyManagement.drivers.wakeup.options = -m $1/" "$tmp_directory/snooze_node_lc.cfg"
+    perl -pi -e "s/^monitoring.external.address.*/monitoring.external.address = $2/" "$tmp_directory/snooze_node_lc.cfg"
 }
 
 # Deploys the kapower3 configuration files

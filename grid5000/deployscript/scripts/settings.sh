@@ -23,7 +23,7 @@ author="Eugen Feller <eugen.feller@inria.fr>"
 log_tag="[Snooze]"
 
 
-multisite=false
+multisite=true
 
 ## Exit codes
 error_code=1
@@ -94,8 +94,8 @@ environment_url=$environment_location/$environment_name
 ## Cluster settings 
 centralized_deployment=false
 number_of_bootstrap_nodes=1
-number_of_group_managers=2
-number_of_local_controllers=2
+number_of_group_managers=4
+number_of_local_controllers=8
 number_of_subnets=1
 
 # Deployment specific settings
