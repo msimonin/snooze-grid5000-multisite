@@ -78,6 +78,7 @@ copy_localcluster_script (){
 configure_localcluster_script(){
    echo "$log_tag  Configuring custom topology"
    settings_path="$base_directory/$root_script_directory/localcluster/scripts/settings.sh"
+   mcast_port=10000
    for i in $(cat $tmp_directory/custom_topology_group_managers.txt) 
    do
       node=`echo $i | cut -f1 -d","`
@@ -86,7 +87,9 @@ configure_localcluster_script(){
       perl -pi -e "s/^number_of_bootstrap_nodes.*/number_of_bootstrap_nodes=0 /" "$tmp_directory/$node.settings.sh"
       perl -pi -e "s/^number_of_local_controllers.*/number_of_local_controllers=0/" "$tmp_directory/$node.settings.sh"
       perl -pi -e "s/^sleep_time.*/sleep_time=$sleep_time/" "$tmp_directory/$node.settings.sh"
+      perl -pi -e "s/^start_group_manager_heartbeat_mcast_port.*/start_group_manager_heartbeat_mcast_port=$mcast_port/" "$tmp_directory/$node.settings.sh" 
       run_taktuk_single_machine "$node" put "[ $tmp_directory/$node.settings.sh ] [ /tmp/localcluster/scripts/settings.sh ]"
+      mcast_port=$(($mcast_port+$gms))
   done
 
   for i in $(cat $tmp_directory/custom_topology_local_controllers.txt) 
