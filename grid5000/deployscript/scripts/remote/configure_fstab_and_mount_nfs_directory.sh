@@ -20,7 +20,7 @@ scriptpath=$(dirname $0)
 source $scriptpath/environment.sh
 
 first_bootstrap_address=`cat $tmp_directory/bootstrap_nodes.txt | head -n 1`
-fstab_entry="$first_bootstrap_address:$exported_directory $exported_directory nfs defaults 0 0"
+fstab_entry="$first_bootstrap_address:$exported_directory $exported_directory nfs $nfs_options 0 0"
 #this is needed ? MATT 02/02/13 ?
 mkdir $exported_directory
 if grep -Fxq "$fstab_entry" /etc/fstab

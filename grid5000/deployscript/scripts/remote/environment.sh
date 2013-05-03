@@ -39,7 +39,7 @@ group_manager2_init_script="/etc/init.d/snoozenode_gm2"
 zookeeper_init_script="/etc/init.d/zookeeper"
 
 # G5K settings
-grid5000_user="root"
+grid5000_user="msimonin"
 working_directory="/$grid5000_user/"
 
 #must be the same than $remote_tmp_directory
@@ -75,6 +75,7 @@ nfs_exports="$exported_directory *(rw,async,no_subtree_check,no_root_squash)"
 
 exported_directory_service_node="/tmp/service"
 nfs_exports_service_node="$exported_directory_service_node *(rw,async,no_subtree_check,no_root_squash)"
+nfs_options="rw,nfsvers=3,hard,intr,async,noatime,nodev,nosuid,auto,rsize=32768,wsize=32768"
 
 # Rabbitmq settings
 rabbitmq_user="snooze"

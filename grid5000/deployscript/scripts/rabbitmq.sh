@@ -21,8 +21,7 @@
 
 install_and_configure_rabbitmq () {
    echo "$log_tag installing and configuring rabbitmq on $1"
-   first_bootstrap=`cat $tmp_directory/bootstrap_nodes.txt | head -n 1`
-   rabbitmq_server=$first_bootstrap
+   rabbitmq_server=`cat $tmp_directory/hosts_list.txt | head -n 1`
    echo $rabbitmq_server > $tmp_directory/rabbitmq_server.txt
 
    install_rabbitmq $rabbitmq_server

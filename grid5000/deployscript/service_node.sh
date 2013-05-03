@@ -46,13 +46,13 @@ print_usage () {
     echo "Options:"
     echo "-a                        Autoconfig"
     echo "-h                        Configure the nfs share"
+    echo "-r                        Install et configure rabbitmq"
     echo "-i                        Install/Update packages"
     echo "-c                        Configure packages"
     echo "-f                        Configure storage"
     echo "-n                        Configure network (create virbr0 bridge and routes)"
     echo "-g                        Generate ISO context file"
     echo "-t                        Transfer backing virtual machine image and context file"
-    echo "-r                        Install et configure rabbitmq"
     echo "-e                        Transfer experiments script"
     echo "-l                        List the assigned cluster addresses"
     echo "-s                        Start cluster"
@@ -71,6 +71,12 @@ autoconfig () {
     echo "$log_tag Starting in autoconfiguration mode! This can take some time, you might consider taking a coffee break :-)"
 
     configure_storage_for_service_node
+    if [[ $? -ne $success_code ]]
+    then
+        return $error_code
+    fi
+
+    install_and_configure_rabbitmq
     if [[ $? -ne $success_code ]]
     then
         return $error_code
@@ -113,11 +119,6 @@ autoconfig () {
         return $error_code
     fi
     
-    install_and_configure_rabbitmq
-    if [[ $? -ne $success_code ]]
-    then
-        return $error_code
-    fi
 
     transfer_experiments_script
     if [[ $? -ne $success_code ]]
