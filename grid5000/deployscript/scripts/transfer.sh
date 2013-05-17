@@ -25,6 +25,13 @@ transfer_virtual_machine_image_and_context () {
 
   transfer_context_file
 
+  transfer_scpTsunami
+
+}
+
+transfer_scpTsunami () {
+    echo "$log_tag Transfering scp Tsunami"
+    transfer_data "$source_scpTsunami_directory/*" "$destination_scpTsunami_directory/"
 }
 
 transfer_backing_virtual_machine_image () {

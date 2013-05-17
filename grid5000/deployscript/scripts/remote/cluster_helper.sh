@@ -25,6 +25,10 @@ start_dstat () {
     $dstat -tcmn $dstat_collection_delay $dstat_collection_count > $dstat_output_file 2>&1 &
 }
 
+start_libvirt () {
+    service libvirt-bin restart
+}
+
 # Starts main script
 start_main () {
     if [ -f $main_init_script ]

@@ -22,6 +22,7 @@
 scriptpath=$(dirname $0)
 source $scriptpath/cluster_helper.sh
 
+start_libvirt
 start_dstat
 start_main
 

@@ -139,7 +139,7 @@ autoconfig () {
 option_found=0
 while getopts ":rnabhicfteglsko:x:v:z:" opt; do
     option_found=1
-    print_settings
+    #print_settings
 
     case $opt in
         a)
