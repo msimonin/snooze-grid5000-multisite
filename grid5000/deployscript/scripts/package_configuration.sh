@@ -171,7 +171,7 @@ create_and_deploy_zookeeper_configuration () {
 
 # Creates a kapower configuration file
 create_kapower3_configuration () {
-    sed 's/^default.*/default = '$cluster_location'/g' "$config_templates_directory/$kapower_config_name" > "$tmp_directory/$kapower_config_name" 
+    sed 's/^default.*/default : '$cluster_location'/g' "$config_templates_directory/$kapower_config_name" > "$tmp_directory/$kapower_config_name" 
 }
 
 # Creates a client configuration file
