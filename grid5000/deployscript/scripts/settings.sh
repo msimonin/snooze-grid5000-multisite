@@ -19,11 +19,11 @@
 
 ## Internal script settings
 script_name=$(basename $0 .sh)
-author="Eugen Feller <eugen.feller@inria.fr>"
+author="Eugen Feller <eugen.feller@inria.fr> Matthieu Simonin <matthieu.simonin@inria.fr>"
 log_tag="[Snooze]"
 
 
-multisite=true
+multisite=false
 
 ## Exit codes
 error_code=1
@@ -70,6 +70,8 @@ local_scripts_directory="$remote_scripts_directory"
 #must be the same that environment.sh
 remote_tmp_directory="$exported_directory_service_node/nfs"
 
+# scp Tsunami destination
+destination_scpTsunami_directory="/opt"
 # Virtual machine image settings
 destination_snooze_directory="/tmp/snooze"
 source_images_directory="$base_directory/vmimages"
@@ -94,8 +96,8 @@ environment_url=$environment_location/$environment_name
 ## Cluster settings 
 centralized_deployment=false
 number_of_bootstrap_nodes=1
-number_of_group_managers=4
-number_of_local_controllers=80
+number_of_group_managers=3
+number_of_local_controllers=5
 number_of_subnets=1
 
 # Deployment specific settings
