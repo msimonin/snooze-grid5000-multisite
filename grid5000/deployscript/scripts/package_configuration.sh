@@ -187,7 +187,7 @@ create_client_configuration () {
 create_bootstrap_configuration () {
     sed 's/^node.role.*/node.role = bootstrap/g' "$config_templates_directory/$node_config_name" > "$tmp_directory/snooze_node_bs.cfg" 
     perl -pi -e "s/^network.listen.controlDataPort..*/network.listen.controlDataPort = $1/" "$tmp_directory/$client_config_name" 
-    perl -pi -e "s/^monitoring.external.address.*/monitoring.external.address = $2/" "$tmp_directory/snooze_node_bs.cfg"
+    perl -pi -e "s/^external.notifier.address.*/external.notifier.address = $2/" "$tmp_directory/snooze_node_bs.cfg"
 }
 
 # Creates group manager config
@@ -201,14 +201,14 @@ create_group_manager_configuration () {
     perl -pi -e "s/^network.listen.monitoringDataPort.*/network.listen.monitoringDataPort = $3/" "$tmp_directory/snooze_node_gm.cfg"
     perl -pi -e "s/^network.multicast.address.*/network.multicast.address = $multicast_address/" "$tmp_directory/snooze_node_gm.cfg"
     perl -pi -e "s/^network.multicast.groupManagerHeartbeatPort.*/network.multicast.groupManagerHeartbeatPort = $4/" "$tmp_directory/snooze_node_gm.cfg"
-    perl -pi -e "s/^monitoring.external.address.*/monitoring.external.address = $6/" "$tmp_directory/snooze_node_gm.cfg"
+    perl -pi -e "s/^external.notifier.address.*/external.notifier.address = $6/" "$tmp_directory/snooze_node_gm.cfg"
 }
 
 #Creates local controller config
 create_local_controller_configuration () {
     sed 's/^node.role.*/node.role = localcontroller/g' "$config_templates_directory/$node_config_name" > "$tmp_directory/snooze_node_lc.cfg" 
     perl -pi -e "s/^energyManagement.drivers.wakeup.options.*/energyManagement.drivers.wakeup.options = -m $1/" "$tmp_directory/snooze_node_lc.cfg"
-    perl -pi -e "s/^monitoring.external.address.*/monitoring.external.address = $2/" "$tmp_directory/snooze_node_lc.cfg"
+    perl -pi -e "s/^external.notifier.address.*/external.notifier.address = $2/" "$tmp_directory/snooze_node_lc.cfg"
 }
 
 # Deploys the kapower3 configuration files
