@@ -182,7 +182,7 @@ save_virtual_machine_subnet() {
     echo "NETWORK=$network" >> $tmp_directory/common_network.txt
     echo "BROADCAST=$broadcast" >> $tmp_directory/common_network.txt
     echo "NETMASK=$netmask" >> $tmp_directory/common_network.txt
-    echo "NAMESERVER=$nameserver" >> $tmp_directory/common_network.txt
+    echo "NAMESERVER=131.254.203.235" >> $tmp_directory/common_network.txt
     echo $virtual_machine_subnet
 }
 
