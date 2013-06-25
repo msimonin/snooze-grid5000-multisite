@@ -171,19 +171,26 @@ get_first_bootstrap_address() {
 
 # Saves the virtual machine subnet configuration (from the frontal)
 save_virtual_machine_subnet() {
-    local virtual_machine_subnet=$(g5k-subnets -j $1 -a | awk '{print $1}' | sed 's/\//\\\//g' )    
-    echo $virtual_machine_subnet | sed s/" "/","/g > $tmp_directory/subnet.txt    
-    gateway=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
-    network=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $5}') 
-    broadcast=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $2}') 
-    netmask=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $3}') 
-    nameserver=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
-    echo "GATEWAY=$gateway" > $tmp_directory/common_network.txt
-    echo "NETWORK=$network" >> $tmp_directory/common_network.txt
-    echo "BROADCAST=$broadcast" >> $tmp_directory/common_network.txt
-    echo "NETMASK=$netmask" >> $tmp_directory/common_network.txt
-    echo "NAMESERVER=131.254.203.235" >> $tmp_directory/common_network.txt
-    echo $virtual_machine_subnet
+    if $multisite ; then 
+      # compute the subnets here
+      $deploy_script_directory/scripts/kavlan.rb $1 $tmp_directory/subnet.txt $tmp_directory/common_network.txt
+      local virtual_machine_subnet=`cat $tmp_directory/subnet.txt`
+      echo $virtual_machine_subnet | sed s/" "/","/g > $tmp_directory/subnet.txt
+    else
+      local virtual_machine_subnet=$(g5k-subnets -j $1 -a | awk '{print $1}' | sed 's/\//\\\//g' )    
+      echo $virtual_machine_subnet | sed s/" "/","/g > $tmp_directory/subnet.txt    
+      gateway=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
+      network=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $5}') 
+      broadcast=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $2}') 
+      netmask=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $3}') 
+      nameserver=$(g5k-subnets -j $1 -a | head -n 1 | awk '{print $4}') 
+      echo "GATEWAY=$gateway" > $tmp_directory/common_network.txt
+      echo "NETWORK=$network" >> $tmp_directory/common_network.txt
+      echo "BROADCAST=$broadcast" >> $tmp_directory/common_network.txt
+      echo "NETMASK=$netmask" >> $tmp_directory/common_network.txt
+      echo "NAMESERVER=131.254.203.235" >> $tmp_directory/common_network.txt
+      echo $virtual_machine_subnet
+    fi
 }
 
 

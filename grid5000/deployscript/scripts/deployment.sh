@@ -31,7 +31,7 @@ deploy_image_vlan () {
     local virtual_machine_subnet=$(save_virtual_machine_subnet $job_id)
     if [ -z "$virtual_machine_subnet" ];
     then
-        echo "$log_tag You must have a reservation with a subnet reserved!"
+        echo "$log_tag You must have a reservation with a subnet/kavlan reserved!"
         return $error_code
     fi
 

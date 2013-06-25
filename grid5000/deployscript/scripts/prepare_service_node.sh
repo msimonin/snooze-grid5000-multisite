@@ -33,7 +33,7 @@ prepare_service_node()
    local virtual_machine_subnet=$(save_virtual_machine_subnet $job_id)   
    if [ -z "$virtual_machine_subnet" ];
    then
-     echo "$log_tag You must have a reservation with a subnet reserved!"
+     echo "$log_tag You must have a reservation with a subnet/kavlan reserved!"
      return $error_code
    fi
 
@@ -41,7 +41,6 @@ prepare_service_node()
 
   install_taktuk
   install_genisoimage
-  install_rabbitmq
  
   copy_files
 
@@ -108,11 +107,6 @@ install_taktuk(){
 install_genisoimage(){
  echo "$log_tag Installing taktuk on service node `cat $tmp_directory/service_node.txt`" 
  run_taktuk "$tmp_directory/service_node.txt" exec "[ apt-get install -y --force-yes genisoimage ]"
-}
-
-install_genisoimage(){
- echo "$log_tag Installing taktuk on service node `cat $tmp_directory/service_node.txt`" 
- run_taktuk "$tmp_directory/service_node.txt" exec "[ apt-get install -y --force-yes rabbitmq-server ]"
 }
 
 copy_files(){

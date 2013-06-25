@@ -25,9 +25,10 @@ configure_network(){
       configure_network_bridge
    fi
 
-   if $multisite; then
-    add_route_rules_on_nodes
-   fi
+#   if $multisite; then
+#    add_route_rules_on_nodes
+#   fi
+
 }
 
 
