@@ -37,8 +37,8 @@ deploy_image_vlan () {
 
     create_hosts_list_vlan $job_id
 
-    ## Matt : ajout du deploiement multi site
-    kadeploy3 -a $environment_url -f $tmp_directory/full_hosts_list.txt  -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k 
+    kadeploy3 -a $environment_url -f $tmp_directory/full_hosts_list.txt  \
+        -o $tmp_directory/nodes_deployed.txt --multi-server --vlan `kavlan -V` -k 
 
     if [[ $? -ne $success_code ]]
     then
